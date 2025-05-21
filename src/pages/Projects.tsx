@@ -1,4 +1,11 @@
-const projects = [
+type Project = {
+  name: string;
+  link: string;
+  stack: string[];
+  blurb: string;
+};
+
+const projects: Project[] = [
     {
       name: "Shelter Occupancy Predictor",
       link: "https://github.com/arthurnguyen/shelter-prediction",
