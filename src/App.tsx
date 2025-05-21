@@ -13,10 +13,10 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* nav here */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/projects" element={<Projects />} />
+        {/* more routes as needed */}
       </Routes>
     </BrowserRouter>
   );
