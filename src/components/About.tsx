@@ -1,4 +1,3 @@
-import React from 'react'
 import Strings from '../utils/Strings'
 import { BiSolidQuoteAltLeft, BiSolidQuoteAltRight } from 'react-icons/bi'
 
