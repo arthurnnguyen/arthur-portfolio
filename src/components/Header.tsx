@@ -4,19 +4,20 @@
 const menu = [
     {id: 1, name: 'Home', href: "/"},
     {id: 2, name: 'Projects', href: "/projects"},
-    {id: 3, name: 'Resume', href: "/resume.pdf"},
-    {id: 4, name: 'Contact', href: "#contact"},
+    {id: 3, name: 'Resume', href: "/resume1.pdf"},
+    {id: 4, name: 'Contact', href: "/contact"},
   ];
 
   function Header() {
     return (
         <div className="sticky top-0 z-50 flex items-center w-screen justify-between border -b-[1px] bg-[#242424]">
-            <div className='w-[90px] h-[90px] bg- flex justify-center items-center bg-[#242424]'>
-                <svg xmlns="http://www.w3.org/2000/svg" 
-                fill="none" viewBox="0 0 24 24" 
-                stroke-width={1.5} 
-                stroke="currentColor" 
-                className="w-10 h-11 text-white">
+            <div className='w-[90px] h-[90px] flex justify-center items-center bg-[#242424]'>
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" viewBox="0 0 24 24" 
+                    stroke-width={1.5} 
+                    stroke="currentColor" 
+                    className="w-10 h-11 text-[#]">
                     <path 
                         stroke-linecap="round" 
                         stroke-linejoin="round" 
@@ -25,28 +26,32 @@ const menu = [
 
             </div>
             <div className='hidden md:flex gap-14'>
-                {menu.map((item) => (
-                    <div className='cursor-pointer
-                hover:underline font-medium'>
-                        <h2>{item.name}</h2>
+                {menu.map(({ id, name, href }) => (
+                    <div className='cursor-pointer hover:underline font-medium' key={id}>
+                        <a
+                            href={href}
+                            target={href.endsWith(".pdf") || href.startsWith("http") ? "_blank" : undefined}
+                            rel="noopener noreferrer"
+                            className='text-[16px] tracking-widest  hover:text-white text-white'
+                        >
+                            {name}
+                        </a>
                     </div>
                 ))}
             </div>
-            <div className='w-[90px] h-[90px]
-                 flex justify-center items-center'>
+            <div className='w-[90px] h-[90x] flex justify-center items-center'>
                 <svg 
                     xmlns="http://www.w3.org/2000/svg" 
                     fill="none" 
                     viewBox="0 0 24 24" 
-                    strokeWidth={1.5} 
+                    stroke-width="1.5" 
                     stroke="currentColor" 
-                    className="w-10 h-11 text-white">
+                    className="size-8">
                     <path 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round"
-                        d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                    stroke-linecap="round" 
+                    stroke-linejoin="round" 
+                    d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" />
                 </svg>
-
             </div>
         </div>
     )
