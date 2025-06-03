@@ -5,7 +5,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="container mx-auto px-4 py-12 text-center"
+      className="flex flex-col items-center text-center px-4 py-12"
     >
       <h2 className="mb-6 text-3xl font-bold text-[#AFAFB0]">Get In Touch</h2>
       <p className="mb-8 text-lg text-[#AFAFB0]">
@@ -15,8 +15,8 @@ export default function Contact() {
       <div className="mx-auto mb-8 flex max-w-md flex-col gap-4">
         {/* Email link */}
         <a
-          href="mailto:arthurnnguyen@gmail.com"
-          className="flex items-center justify-center gap-3 rounded-lg bg-[#0E8AC3] px-6 py-3 text-white hover:bg-blue-700 transition"
+          //href="mailto:arthurnnguyen@gmail.com"
+          className="flex items-center justify-center gap-3 rounded-lg bg-[#0E8AC3] px-6 py-3 text-white"
         >
           <IoMailOutline className="h-6 w-6" />
           <span className="font-medium">arthurnnguyen@gmail.com</span>
@@ -24,7 +24,7 @@ export default function Contact() {
 
         {/* Phone Number*/}
         <a
-          className="flex items-center justify-center gap-3 rounded-lg bg-[#0E8AC3] px-6 py-3 text-white hover:bg-blue-700 transition"
+          className="flex items-center justify-center gap-3 rounded-lg bg-[#0E8AC3] px-6 py-3 text-white"
         >
           <IoCallOutline className="h-6 w-6" />
           <span className="font-medium">714-723-9681</span>
@@ -53,11 +53,11 @@ export default function Contact() {
         </a>
       </div>
 
-      <p className="text-sm text-[#AFAFB0]">
+      {/* <p className="text-sm text-[#AFAFB0]">
         Or, if you prefer a quick form submission, fill out your info below:
-      </p>
+      </p> */}
 
-      <form
+      {/* <form
         action="mailto:arthurnnguyen@gmail.com"
         method="POST"
         encType="text/plain"
@@ -90,7 +90,7 @@ export default function Contact() {
         >
           Send Message
         </button>
-      </form>
+        </form> */}
     </section>
   );
 }
