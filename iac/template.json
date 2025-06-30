@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "staticSites_arthur_portfolio_name": {
+      "type": "String"
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2024-04-01",
+      "location": "West US 2",
+      "name": "[parameters('staticSites_arthur_portfolio_name')]",
+      "properties": {
+        "allowConfigFileUpdates": true,
+        "branch": "main",
+        "enterpriseGradeCdnStatus": "Disabled",
+        "provider": "GitHub",
+        "repositoryUrl": "[concat('https://github.com/arthurnnguyen/', parameters('staticSites_arthur_portfolio_name'))]",
+        "stagingEnvironmentPolicy": "Enabled"
+      },
+      "sku": {
+        "name": "Free",
+        "tier": "Free"
+      },
+      "type": "Microsoft.Web/staticSites"
+    },
+    {
+      "apiVersion": "2024-04-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/staticSites', parameters('staticSites_arthur_portfolio_name'))]"
+      ],
+      "location": "West US 2",
+      "name": "[concat(parameters('staticSites_arthur_portfolio_name'), '/default')]",
+      "properties": {
+        "applicableEnvironmentsMode": "SpecifiedEnvironments"
+      },
+      "type": "Microsoft.Web/staticSites/basicAuth"
+    }
+  ],
+  "variables": {}
+}

@@ -1,0 +1,81 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.36.1.42791",
+      "templateHash": "1843863604277966211"
+    }
+  },
+  "parameters": {
+    "siteName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the Static Web App (must be globally unique)"
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Azure region for deployment"
+      }
+    },
+    "repositoryUrl": {
+      "type": "string",
+      "defaultValue": "[format('https://github.com/arthurnnguyen/{0}', parameters('siteName'))]",
+      "metadata": {
+        "description": "Git repository URL for your app code"
+      }
+    },
+    "branchName": {
+      "type": "string",
+      "defaultValue": "main",
+      "metadata": {
+        "description": "Branch to build from"
+      }
+    },
+    "enableBasicAuth": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Enable basic authentication (dev/test only)"
+      }
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Web/staticSites",
+      "apiVersion": "2024-04-01",
+      "name": "[parameters('siteName')]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "Free",
+        "tier": "Free"
+      },
+      "properties": {
+        "repositoryUrl": "[parameters('repositoryUrl')]",
+        "branch": "[parameters('branchName')]",
+        "allowConfigFileUpdates": true,
+        "enterpriseGradeCdnStatus": "Disabled",
+        "stagingEnvironmentPolicy": "Enabled"
+      }
+    },
+    {
+      "condition": "[parameters('enableBasicAuth')]",
+      "type": "Microsoft.Web/staticSites/basicAuth",
+      "apiVersion": "2024-04-01",
+      "name": "[format('{0}/{1}', parameters('siteName'), 'default')]",
+      "properties": {
+        "applicableEnvironmentsMode": "SpecifiedEnvironments"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/staticSites', parameters('siteName'))]"
+      ],
+      "metadata": {
+        "description": "Optional basicAuth configuration"
+      }
+    }
+  ]
+}
