@@ -1,0 +1,33 @@
+trigger:
+  branches:
+    include:
+      - demo/staticwebapp
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: AzureCLI@2
+    displayName: 'Install Bicep'
+    inputs:
+      azureSubscription: 'Your-Service-Connection-Name'
+      scriptType: bash
+      scriptLocation: inlineScript
+      inlineScript: az bicep install
+
+  - script: |
+      bicep build demo.bicep
+      bicep lint demo.bicep
+    displayName: 'Build & Lint Bicep'
+
+  - task: AzureCLI@2
+    displayName: 'Deploy Static Web App'
+    inputs:
+      azureSubscription: 'Your-Service-Connection-Name'
+      scriptType: bash
+      scriptLocation: inlineScript
+      inlineScript: |
+        az deployment group create \
+          --resource-group demo-rg \
+          --template-file demo.bicep \
+          --parameters @demo.params.json
